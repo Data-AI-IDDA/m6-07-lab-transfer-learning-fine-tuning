@@ -20,7 +20,6 @@ By the end of this lab you should be able to:
 - Freeze and selectively unfreeze layers using `requires_grad`.
 - Apply **discriminative learning rates** to different parameter groups in a single optimiser.
 - Quantify the improvement transfer learning provides over training from scratch on a small dataset.
-- Recognise the BatchNorm-during-fine-tuning pitfall and apply the standard mitigation.
 
 ## Setup and Context
 
@@ -144,25 +143,7 @@ optimizer = optim.Adam([
 3. Train for an additional 10 epochs.
 4. Plot the curves and report best validation and test accuracy.
 
-### Task 4 — BatchNorm Stabilisation Experiment
-
-Repeat Task 3 with one change: **freeze the BatchNorm layers** in `layer4` so they use their pretrained running statistics instead of the small mini-batch statistics.
-
-```python
-def freeze_bn(module):
-    if isinstance(module, nn.BatchNorm2d):
-        module.eval()
-        for p in module.parameters():
-            p.requires_grad = False
-
-model.layer4.apply(freeze_bn)
-```
-
-Train for the same 10 additional epochs and report the test accuracy.
-
-In a markdown cell, compare Task 3 and Task 4 results. On a small dataset like Flowers-102, freezing BN often gives a small-to-moderate improvement.
-
-### Task 5 — Comparison Summary
+### Task 4 — Comparison Summary
 
 Fill in this table and write a 4–6 sentence summary:
 
@@ -171,13 +152,11 @@ Fill in this table and write a 4–6 sentence summary:
 | From scratch (Task 1) | … | … | … | … |
 | Feature extraction (Task 2) | … | … | … | … |
 | Fine-tune last block (Task 3) | … | … | … | … |
-| Fine-tune + BN frozen (Task 4) | … | … | … | … |
 
 Your summary should answer:
 
 - How much did transfer learning improve over from-scratch?
 - Did fine-tuning the last block help over feature extraction?
-- Did freezing BatchNorm help when fine-tuning?
 - Which configuration would you recommend for tomorrow's cat-detection assessment, and why?
 
 ## Submission
@@ -191,8 +170,7 @@ Your summary should answer:
 - [ ] From-scratch baseline trained with curves and final test accuracy.
 - [ ] Feature-extraction model trained with curves; trainable param count printed.
 - [ ] Fine-tuned model with discriminative learning rates trained.
-- [ ] BN-frozen variant of fine-tuning trained and compared.
-- [ ] Comparison table with at least 4 rows and a written summary.
+- [ ] Comparison table with all three approaches and a written summary.
 - [ ] `Kernel → Restart & Run All` produces no errors.
 
 ### How to submit (Git workflow)
