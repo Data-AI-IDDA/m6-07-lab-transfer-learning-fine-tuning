@@ -126,9 +126,9 @@ optimizer = optim.Adam(trainable, lr=1e-3)
 
 6. Plot curves and report best validation and test accuracy.
 
-### Task 3 — Fine-Tuning the Last Block
+### Task 3 — Fine-Tuning the Last Block and Three-Way Comparison
 
-Take Task 2's trained model and continue training, but now unfreeze `layer4` (the last residual block) of the ResNet.
+Take Task 2's trained model and continue training, but now unfreeze `layer4` (the last residual block) of the ResNet. Then close the lab by comparing all three approaches.
 
 1. Set `requires_grad=True` for all parameters in `model.layer4` and `model.fc`. Leave the rest frozen.
 2. Use **discriminative learning rates** — `lr=1e-5` for `layer4`, `lr=1e-3` for `fc`:
@@ -142,22 +142,13 @@ optimizer = optim.Adam([
 
 3. Train for an additional 10 epochs.
 4. Plot the curves and report best validation and test accuracy.
-
-### Task 4 — Comparison Summary
-
-Fill in this table and write a 4–6 sentence summary:
+5. Fill in the comparison table below and write a **4–6 sentence summary** answering: how much did transfer learning improve over from-scratch, did fine-tuning the last block help over feature extraction, and which configuration would you recommend for tomorrow's cat-detection assessment and why?
 
 | Approach | Trainable params | Best val acc | Test acc | Total training time |
 |---|---|---|---|---|
 | From scratch (Task 1) | … | … | … | … |
 | Feature extraction (Task 2) | … | … | … | … |
 | Fine-tune last block (Task 3) | … | … | … | … |
-
-Your summary should answer:
-
-- How much did transfer learning improve over from-scratch?
-- Did fine-tuning the last block help over feature extraction?
-- Which configuration would you recommend for tomorrow's cat-detection assessment, and why?
 
 ## Submission
 
@@ -170,7 +161,7 @@ Your summary should answer:
 - [ ] From-scratch baseline trained with curves and final test accuracy.
 - [ ] Feature-extraction model trained with curves; trainable param count printed.
 - [ ] Fine-tuned model with discriminative learning rates trained.
-- [ ] Comparison table with all three approaches and a written summary.
+- [ ] Comparison table with all three approaches and a 4–6 sentence written summary (in Task 3).
 - [ ] `Kernel → Restart & Run All` produces no errors.
 
 ### How to submit (Git workflow)
